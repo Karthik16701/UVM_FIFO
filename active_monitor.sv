@@ -1,8 +1,8 @@
-class fifo_active_monitor extends uvm_monitor;
+class fifo_monitor extends uvm_monitor;
 virtual fifo_interface vif;
 fifo_sequence_item item_got;
     uvm_analysis_port#(fifo_sequence_item) item_got_port;
-   `uvm_component_utils(fifo_active_monitor)
+   `uvm_component_utils(fifo_monitor)
    
    function new(string name = "fifo_active_monitor", uvm_component parent);
      super.new(name,parent);
@@ -16,41 +16,26 @@ fifo_sequence_item item_got;
        `uvm_fatal(" active Monitor: ", "No vif is found!")
   endfunction
        
-        virtual task run_phase(uvm_phase phase);
+          virtual task run_phase(uvm_phase phase);
     forever begin
-      @(posedge vif.m_mp.clk)
-      if((vif.m_mp.m_cb.i_wren == 0)&&(vif.m_mp.m_cb.i_rden == 0))
-        begin
-          $display("\nboth WR and wr is low");
-     //   item_got.i_wrdata = vif.m_mp.m_cb.i_wrdata;
-        item_got.i_wren = 'b0;
-        item_got.i_rden = 'b0;
-      //  item_got_port.write(item_got);
-        end
-      else if((vif.m_mp.m_cb.i_wren == 0)&&(vif.m_mp.m_cb.i_rden == 1))begin
-        @(posedge vif.m_mp.clk)
-        $display("\nRD is high");
-   //   item_got.o_rddata = vif.m_mp.m_cb.o_rddata;
-        item_got.i_rden = 'b1;
-        item_got.i_wren = 'b0;
-   //     item_got_port.write(item_got);
-      end
-      else if((vif.m_mp.m_cb.i_wren==1)&&(vif.m_mp.m_cb.i_rden == 0))
-        begin
-        @(posedge vif.m_mp.clk)
-          $display("\nWR is high");
+        @(posedge vif.m_mp.m_cb)
+        if(vif.m_mp.m_cb.i_wren == 1)begin
+        $display("\nWR is high");
         item_got.i_wrdata = vif.m_mp.m_cb.i_wrdata;
-        item_got.i_rden = 'b0;
         item_got.i_wren = 'b1;
+        item_got.i_rden = 'b0;
+        item_got.o_full = vif.m_mp.m_cb.o_full;
+       item_got.o_alm_full = vif.m_mp.m_cb.o_alm_full;
         item_got_port.write(item_got);
       end
-      else if((vif.m_mp.m_cb.i_wren==1)&&(vif.m_mp.m_cb.i_rden == 1))
-        begin
-        @(posedge vif.m_mp.clk)
-          $display("\nboth RD and wr is high");
- //       item_got.i_wrdata = vif.m_mp.m_cb.i_wrdata;
+      else if(vif.m_mp.m_cb.rd == 1)begin
+          @(posedge vif.m_mp.m_cb)
+        $display("\nRD is high");
+        item_got.o_rddata = vif.m_mp.m_cb.o_rddata;
         item_got.i_rden = 'b1;
-        item_got.i_wren = 'b1;
+        item_got.i_wren = 'b0;
+      item_got.o_alm_empty = vif.m_mp.m_cb.o_alm_empty;
+        item_got.o_empty = vif.m_mp.m_cb.o_empty;
         item_got_port.write(item_got);
       end
     end
