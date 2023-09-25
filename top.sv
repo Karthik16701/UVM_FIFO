@@ -5,10 +5,8 @@ import uvm_pkg::*;
 `include "sequence.sv"
 `include "sequencer.sv"
 `include "driver.sv"
-`include "active_monitor.sv"
-`include "passive_monitor.sv"
-`include "active_agent.sv"
-`include "passive_agent.sv"
+`include "monitor.sv"
+`include " agent.sv"
 `include "scoreboard.sv"
 `include "environment.sv"
 `include "test.sv"
@@ -28,7 +26,7 @@ module tb;
   
   fifo_interface tif(clk, reset);
   
-  SYN_FIFO dut(.clk(tif.clk),
+  my_fifo dut(.clk(tif.clk),
                .rst(tif.reset),
                .data_in(tif.i_wrdata),
                .write_en(tif.i_wren),
