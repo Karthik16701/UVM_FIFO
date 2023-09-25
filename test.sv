@@ -17,7 +17,7 @@ class fifo_test extends uvm_test;
   
   virtual task run_phase(uvm_phase phase);
     phase.raise_objection(this);
-    fifo_seq.start(fifo_env.fifo_act_agt.fifo_seqr);
+    fifo_seq.start(fifo_env.fifo_agt.fifo_seqr);
     phase.drop_objection(this);
     phase.phase_done.set_drain_time(this, 100);
   endtask
