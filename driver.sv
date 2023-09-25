@@ -28,17 +28,17 @@ class fifo_driver extends uvm_driver#(fifo_sequence_item);
   endtask
   
   virtual task main_write(input [127:0] din);
-    @(posedge vif.d_mp.clk)
+    @(posedge vif.d_mp.m_cb)
     vif.d_mp.d_cb.i_wren <= 'b1;
     vif.d_mp.d_cb.i_wrdata <= din;
-    @(posedge vif.d_mp.clk)
+    @(posedge vif.d_mp.m_cb)
     vif.d_mp.d_cb.i_wren <= 'b0;
   endtask
   
   virtual task main_read();
-    @(posedge vif.d_mp.clk)
+    @(posedge vif.d_mp.m_cb)
     vif.d_mp.d_cb.i_rden <= 'b1;
-    @(posedge vif.d_mp.clk)
+    @(posedge vif.d_mp.m_cb)
     vif.d_mp.d_cb.i_rden <= 'b0;
   endtask
 
