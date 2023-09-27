@@ -1,6 +1,4 @@
- //`include "fifo_environment.sv"
-
-class fifo_test extends uvm_test;
+  class fifo_test extends uvm_test;
   fifo_sequence fifo_seq;
   fifo_environment fifo_env;
   `uvm_component_utils(fifo_test)
