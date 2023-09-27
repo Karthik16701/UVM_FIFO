@@ -1,4 +1,4 @@
-class fifo_monitor extends uvm_monitor;
+ class fifo_monitor extends uvm_monitor;
 virtual fifo_interface vif;
 fifo_sequence_item item_got;
     uvm_analysis_port#(fifo_sequence_item) item_got_port;
@@ -28,7 +28,7 @@ fifo_sequence_item item_got;
        item_got.o_alm_full = vif.m_mp.m_cb.o_alm_full;
         item_got_port.write(item_got);
       end
-      else if(vif.m_mp.m_cb.rd == 1)begin
+      if(vif.m_mp.m_cb.i_rden == 1)begin
           @(posedge vif.m_mp.m_cb)
         $display("\nRD is high");
         item_got.o_rddata = vif.m_mp.m_cb.o_rddata;
@@ -41,7 +41,6 @@ fifo_sequence_item item_got;
     end
   endtask
 endclass
-       
    
    
 
