@@ -1,4 +1,4 @@
-interface fifo_interface(input clk, reset);
+ interface fifo_interface(input clk, reset);
   logic i_wren;
   logic i_rden;
   logic [127:0] i_wrdata;
@@ -18,7 +18,7 @@ interface fifo_interface(input clk, reset);
     input o_empty;
     input o_alm_full;
     input o_alm_empty;
-   input [127:0] o_rddata;
+   input o_rddata;
   endclocking
   
   clocking m_cb @(posedge clk);
