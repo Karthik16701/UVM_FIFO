@@ -1,4 +1,4 @@
- class fifo_sequence_item extends uvm_sequence_item;
+  class fifo_sequence_item extends uvm_sequence_item;
   rand bit i_wren;
   rand bit i_rden;
   rand bit [127:0] i_wrdata;
