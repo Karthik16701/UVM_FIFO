@@ -14,11 +14,7 @@
     output i_wren;
     output i_rden;
     output i_wrdata;
-    input o_full;
-    input o_empty;
-    input o_alm_full;
-    input o_alm_empty;
-   input o_rddata;
+    input reset;
   endclocking
   
   clocking m_cb @(posedge clk);
@@ -38,3 +34,5 @@
   
     
 endinterface
+  
+  
