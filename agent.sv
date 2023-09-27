@@ -1,11 +1,4 @@
-//`include "fifo_sequence_item.sv"
-//`include "fifo_sequence.sv"
-//`include "fifo_sequencer.sv"
-//`include "fifo_driver.sv"
-//`include "fifo_active_monitor.sv"
-//`include "fifo_active_agent.sv"
-
-class fifo_agent extends uvm_agent;
+ class fifo_agent extends uvm_agent;
   fifo_sequencer fifo_seqr;
   fifo_driver fifo_dri;
   fifo_monitor fifo_mon;
@@ -30,4 +23,5 @@ class fifo_agent extends uvm_agent;
   endfunction
   
 endclass
+    
     
