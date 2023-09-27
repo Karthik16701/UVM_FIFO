@@ -1,4 +1,4 @@
-class fifo_coverage extends uvm_subscriber #(sequence_item);
+class fifo_coverage extends uvm_subscriber #(fifo_sequence_item);
 //  covergroup cg;
   
     `uvm_component_utils(fifo_coverage)
@@ -10,7 +10,7 @@ class fifo_coverage extends uvm_subscriber #(sequence_item);
   endfunction
 
   
-sequence_item req;
+fifo_sequence_item req;
 real cove3;
 real cove;
 covergroup cg;
@@ -53,7 +53,7 @@ data_out: coverpoint req.o_rddata {
 endgroup
 cg=new();
 cg2=new();
-  function void write (sequence_item t);
+  function void write (fifo_sequence_item t);
     req=t;
     cg.sample();
     cg2.sample();
