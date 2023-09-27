@@ -1,4 +1,4 @@
-class fifo_driver extends uvm_driver#(fifo_sequence_item);
+ class fifo_driver extends uvm_driver#(fifo_sequence_item);
   virtual fifo_interface vif;
   fifo_sequence_item req;
   `uvm_component_utils(fifo_driver)
