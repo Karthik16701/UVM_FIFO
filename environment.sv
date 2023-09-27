@@ -1,8 +1,4 @@
-//`include "active_agent.sv"
-//`include "passive_agent.sv"
-//`include "fifo_scoreboard.sv"
-
-class fifo_environment extends uvm_env;
+ class fifo_environment extends uvm_env;
   fifo_agent fifo_agt;
  
   fifo_scoreboard fifo_scb;
@@ -14,7 +10,7 @@ function new(string name = "fifo_environment", uvm_component parent);
   
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-    fifo_agt = fifo_active_agent::type_id::create("fifo_act_agt", this);
+    fifo_agt = fifo_agent::type_id::create("fifo_act_agt", this);
      fifo_scb = fifo_scoreboard::type_id::create("fifo_scb", this);
   endfunction
   
