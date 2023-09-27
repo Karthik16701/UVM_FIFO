@@ -4,7 +4,7 @@ fifo_sequence_item item_got;
     uvm_analysis_port#(fifo_sequence_item) item_got_port;
    `uvm_component_utils(fifo_monitor)
    
-   function new(string name = "fifo_active_monitor", uvm_component parent);
+   function new(string name = "fifo_monitor", uvm_component parent);
      super.new(name,parent);
      item_got_port =new("item_got_port",this);
    endfunction
@@ -29,7 +29,7 @@ fifo_sequence_item item_got;
         item_got_port.write(item_got);
       end
       if(vif.m_mp.m_cb.i_rden == 1)begin
-          @(posedge vif.m_mp.m_cb)
+        //  @(posedge vif.m_mp.m_cb)
         $display("\nRD is high");
         item_got.o_rddata = vif.m_mp.m_cb.o_rddata;
         item_got.i_rden = 'b1;
