@@ -1,6 +1,6 @@
  class fifo_environment extends uvm_env;
   fifo_agent fifo_agt;
- 
+ fifo_coverage fifo_cov;
   fifo_scoreboard fifo_scb;
   `uvm_component_utils(fifo_environment)
   
@@ -16,6 +16,7 @@ function new(string name = "fifo_environment", uvm_component parent);
   
   virtual function void connect_phase(uvm_phase phase);
     fifo_agt.fifo_mon.item_got_port.connect(fifo_scb.item_got_export);
+   fifo_agt.fifo_mon.item_got_port.connect(fifo_cov.analysis_export);
    endfunction
   
 endclass
