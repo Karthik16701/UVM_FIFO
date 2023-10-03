@@ -9,6 +9,7 @@ import uvm_pkg::*;
 `include "driver.sv"
 `include "monitor.sv"
 `include "agent.sv"
+`include "coverage.sv"
 `include "scoreboard.sv"
 `include "environment.sv"
 `include "test.sv"
